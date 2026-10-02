@@ -1,0 +1,25 @@
+# Local settings may contain the MySQL password.
+/.env
+/.env.*
+!/.env.example
+
+# Dependencies installed on this computer.
+/vendor/
+
+# Generated application files.
+/writable/cache/*
+!/writable/cache/index.html
+/writable/logs/*
+!/writable/logs/index.html
+/writable/session/*
+!/writable/session/index.html
+/writable/debugbar/*
+!/writable/debugbar/index.html
+/writable/uploads/*
+!/writable/uploads/index.html
+
+# User-uploaded pictures are data, not project source.
+/public/uploads/*
+
+# Duplicate of the included system/ folder.
+/system.zip
