@@ -1,6 +1,7 @@
 <?php
 helper('form');
 $editing = isset($user);
+$formValues = (array) (session('user_form_values') ?? []);
 ?>
 <?= $this->include('templates/header') ?>
 
@@ -10,7 +11,9 @@ $editing = isset($user);
 </section>
 
 <div class="form-card">
-    <?= validation_list_errors() ?>
+    <?php foreach ((array) (session('user_form_errors') ?? []) as $message): ?>
+        <p class="form-error" role="alert"><?= esc($message) ?></p>
+    <?php endforeach ?>
     <?php if (session('error')): ?>
         <p class="form-error" role="alert"><?= esc(session('error')) ?></p>
     <?php endif ?>
@@ -22,13 +25,31 @@ $editing = isset($user);
         <div class="form-field">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" maxlength="50"
-                value="<?= old('username', $user['username'] ?? '', 'attr') ?>" required>
+                value="<?= esc($formValues['username'] ?? ($user['username'] ?? ''), 'attr') ?>" required>
         </div>
 
         <div class="form-field">
             <label for="full_name">Full name</label>
             <input id="full_name" name="full_name" type="text" maxlength="100"
-                value="<?= old('full_name', $user['full_name'] ?? '', 'attr') ?>" required>
+                value="<?= esc($formValues['full_name'] ?? ($user['full_name'] ?? ''), 'attr') ?>" required>
+        </div>
+
+        <div class="form-field">
+            <label for="password"><?= $editing ? 'New password (optional)' : 'Password' ?></label>
+            <input id="password" name="password" type="password" minlength="8" maxlength="72"
+                autocomplete="new-password" <?= $editing ? '' : 'required' ?>>
+            <?php if ($editing): ?>
+                <p class="form-hint">Leave blank to keep this user's current password.</p>
+            <?php else: ?>
+                <p class="form-hint">Use at least 8 characters.</p>
+            <?php endif ?>
+        </div>
+
+        <div class="form-field">
+            <label for="password_confirm">Confirm password</label>
+            <input id="password_confirm" name="password_confirm" type="password"
+                minlength="8" maxlength="72" autocomplete="new-password"
+                <?= $editing ? '' : 'required' ?>>
         </div>
 
         <?php if ($editing): ?>

@@ -16,6 +16,7 @@ class UserModel extends Model
         'full_name',
         'created_at',
         'avatar',
+        'password',
     ];
 
     protected $useTimestamps = false;

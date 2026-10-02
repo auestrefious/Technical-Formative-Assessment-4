@@ -1,3 +1,4 @@
+<?php helper('form'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,14 @@
                 <a href="<?= site_url('about') ?>">About</a>
                 <a href="<?= site_url('customers') ?>">Customers</a>
                 <a href="<?= site_url('users') ?>">Users</a>
+                <?php if (session('user_id')): ?>
+                    <form class="nav-logout" action="<?= esc(site_url('logout'), 'attr') ?>" method="post">
+                        <?= csrf_field() ?>
+                        <button type="submit">Log out</button>
+                    </form>
+                <?php else: ?>
+                    <a href="<?= site_url('login') ?>">Log in</a>
+                <?php endif ?>
             </nav>
         </div>
     </header>

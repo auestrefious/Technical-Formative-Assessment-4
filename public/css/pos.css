@@ -38,6 +38,9 @@ body {
 nav { display: flex; gap: 22px; }
 nav a { color: #dbeafe; text-decoration: none; font-weight: 600; }
 nav a:hover { color: white; }
+.nav-logout { margin: 0; }
+.nav-logout button { padding: 0; border: 0; background: none; color: #dbeafe; font: inherit; font-weight: 600; cursor: pointer; }
+.nav-logout button:hover { color: white; }
 
 .container { width: min(1100px, 92%); margin: 0 auto; padding: 64px 0; flex: 1; }
 .hero { max-width: 760px; padding: 44px 0 58px; }
